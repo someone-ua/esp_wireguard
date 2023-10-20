@@ -905,7 +905,7 @@ err_t wireguardif_init(struct netif *netif) {
 	struct netif* underlying_netif = NULL;
 	char lwip_netif_name[8] = {0,};
 
-	err = esp_netif_get_netif_impl_name(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), lwip_netif_name);
+	err = esp_netif_get_netif_impl_name(esp_netif_get_handle_from_ifkey(CONFIG_WIREGUARD_UNDERLYING_IF_KEY), lwip_netif_name);
 	if (err != ESP_OK) {
 		ESP_LOGE(TAG, "esp_netif_get_netif_impl_name: %s", esp_err_to_name(err));
 		result = ERR_IF;
@@ -913,7 +913,7 @@ err_t wireguardif_init(struct netif *netif) {
 	}
 	underlying_netif = netif_find(lwip_netif_name);
 	if (underlying_netif == NULL) {
-		ESP_LOGE(TAG, "netif_find: cannot find WIFI_STA_DEF");
+		ESP_LOGE(TAG, "netif_find: cannot find PPP_DEF");
 		result = ERR_IF;
 		goto fail;
 	}

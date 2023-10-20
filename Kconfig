@@ -9,6 +9,10 @@ choice WIREGUARD_ESP_ADAPTER_SELECTION
         bool "ESP-NETIF"
 endchoice
 
+config WIREGUARD_UNDERLYING_IF_KEY
+    string "Underlying IF key"
+    default "WIFI_STA_DEF"
+
 config WIREGUARD_MAX_PEERS
     int "Max number of peers"
     default 1
